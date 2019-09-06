@@ -1,3 +1,8 @@
+import pickle
+import sqlite3
+
+
+
 class CustomInput:   
     def Info(self):
         name = self.inputName()
@@ -5,18 +10,50 @@ class CustomInput:
         email = self.inputEmail()
         birthDate = self.inputBirthDate()
         temp = (name,sex,email,birthDate)
+
         return temp
 
     def inputInfo(self,infoList):
         print("고객 정보를 입력하세요")
         infoList.append(self.Info())
 
+        conn=sqlite3.connect('infodb.db')
+        c = conn.cursor()
+        c.execute('''
+        insert into stocks(name,sex,email,year)
+        values(?,?,?,?)
+        ''',self.Info())
+        conn.commit()
+        conn.close()
+
+        # with open("./data.pickle","wb") as file:
+        #     pickle.dump(infoList, file)
+        
     def updateInfo(self,infoCount,infoList):
         if infoCount == -1:
             print("현재 조회하고 있는 고객 정보가 없습니다.")
         else:
             print("수정할 정보로 입력하십시오")
+
+            temp1 = infoList[infoCount]      #현재 고객 정보 저장
+
             infoList[infoCount]=self.Info()
+
+            temp2 = infoList[infoCount]      #변경된 고객 정보 저장
+            tempsql = temp2 + temp1          #update sql문을 위한 정보 저장
+            
+            conn=sqlite3.connect('infodb.db')
+            c = conn.cursor()
+            c.execute('''
+            update stocks 
+            set name=? , sex=? , email=? , year=?
+            where name=? and sex=? and email=? and year=?
+            ''',tempsql)
+            conn.commit()
+            conn.close()
+
+            # with open("./data.pickle","wb") as file:
+            #     pickle.dump(infoList, file)
         return infoCount
 
     def deleteInfo(self,infoCount,infoList):
@@ -27,7 +64,18 @@ class CustomInput:
             print("조회 중인 고객 정보가 없습니다.")
 
         else:
+            conn=sqlite3.connect('infodb.db')
+            c = conn.cursor()
+            c.execute('''
+            delete from stocks
+            where name=? and sex=? and email=? and year=?
+            ''',infoList[infoCount])
+            conn.commit()
+            conn.close()
+
             del infoList[infoCount]
+            with open("./data.pickle","wb") as file:
+                pickle.dump(infoList, file)
             print("현재 고객 정보를 삭제합니다")
             if len(infoList) == infoCount:
                 print("마지막 페이지 고객 정보를 삭제하셨습니다. 이전 고객 정보를 불러 옵니다.")

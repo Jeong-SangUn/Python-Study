@@ -25,6 +25,7 @@ def game():
     AInumber = getRandomNumber()
     count = 0
     while True:
+        print(AInumber)
         select = input("1~100 사이 중 AI의 값을 예측하여 입력하세요")
         if select == False:
             print("값을 입력하세요")

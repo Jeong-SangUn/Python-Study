@@ -17,7 +17,7 @@ class Printinfo:
                 count += 1
                 print("|{0:^2}|{1:^10}|{2:^5}|{3:^25}|{4:^9}|".format(count,member[0],member[1],member[2],member[3]))
 
-    def input_manual(self,):
+    def input_manual(self):
         select = input('''
     ******************************************************************************************************
     어떤 기능을 사용하시겠습니까
