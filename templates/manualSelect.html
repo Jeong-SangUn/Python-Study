@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>선택 페이지</title>
+    </head>
+    <body>
+            <form action="/infoSelect/" method="post">
+                <input type="hidden" name="page"  value={{page}}>
+                <table>
+                    <tr>
+                        <td>현재 고객 페이지: {{page}}</td>
+                    </tr>
+                    <tr>
+                        <td><input type="submit" name="select"  value="고객정보입력"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="submit" name="select"  value="전체 고객정보 조회"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="submit" name="select"  value="현재 고객정보 조회"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="submit" name="select" value="이전 고객정보 조회"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="submit" name="select" value="다음 고객정보 조회"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="submit" name="select" value="현재 고객 정보 수정"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="submit" name="select" value="현재 고객 정보 삭제"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="submit" name="select" value="프로그램종료"></td>
+                    </tr>
+                </table>
+            </form>
+    </body>
+</html>

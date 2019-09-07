@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>고객 정보 출력 페이지</title>
+    </head>
+    <body>
+        <table border="1">
+            {% if state == 'next' %}
+                <tr>
+                    <td>다음 고객 정보가 없습니다.</td>
+                </tr>
+            {% elif state == 'pre' %}
+                <tr>
+                    <td>이전 고객 정보가 없습니다.</td>
+                </tr>
+            {% endif %}
+        </table>
+        <form action="/manualSelect" method="GET">
+            <input type="hidden" name="page" value={{page}}>
+            <input type="submit" value="매뉴얼 선택으로">
+        </form>
+    </body>
+</html>

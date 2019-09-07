@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>고객 정보 삭제 페이지</title>
+    </head>
+    <body>
+        <form action="/deleteinfo_post/" method="post">
+            <input type="hidden" name="page" value={{page}}>
+            <table>
+                <tr>
+                    <td>페이지</td>
+                    <td><input type="text" readonly value={{result[0]}}></td>
+                </tr>
+                <tr>
+                    <td>이름</td>
+                    <td><input type="text" readonly name="name" value={{result[1]}}></td>
+                </tr>
+                <tr>
+                    <td>성별</td>
+                    <td><input type="text" readonly name="gender" value={{result[2]}}></td>
+                </tr>
+                <tr>
+                    <td>이메일</td>
+                    <td><input type="text" readonly name="email" value={{result[3]}}></td>
+                </tr>
+                <tr>
+                    <td>출생연도</td>
+                    <td><input type="text" readonly name="year" value={{result[4]}}></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="right"><input type="submit" value="현재 고객페이지를 삭제 합니다"></td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

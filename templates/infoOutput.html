@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>고객 정보 출력 페이지</title>
+    </head>
+    <body>
+        <table border="1">
+            <tr>
+                <td>페이지</td>
+                <td>이름</td>
+                <td>성별</td>
+                <td>이메일</td>
+                <td>출생연도</td>
+            </tr>
+                {% for item in result %}
+                <tr>
+                    <td>{{item[0]}}</td>
+                    <td>{{item[1]}}</td>
+                    <td>{{item[2]}}</td>
+                    <td>{{item[3]}}</td>
+                    <td>{{item[4]}}</td>
+                    
+                </tr>
+                {% endfor %}
+        </table>
+        <form action="/manualSelect" method="GET">
+            <input type="hidden" name="page" value={{page}}>
+            <input type="submit" value="매뉴얼 선택으로">
+        </form>
+    </body>
+</html>
