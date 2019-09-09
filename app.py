@@ -51,7 +51,7 @@ def login_post():
 
 @app.route('/home/') 
 def home():
-    conn=sqlite3.connect('webinfo.db')
+    conn=sqlite3.connect('./webinfo.db')
     c = conn.cursor()
     c.execute("select min(no) from stocks")
     page=c.fetchone()
