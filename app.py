@@ -64,7 +64,6 @@ def home():
 @app.route('/manualSelect/' , methods=['GET']) 
 def manualSelect():
     page = request.args.get('page') 
-    print(page)
     return render_template('manualSelect.html',page=page)       
 
 @app.route('/infoInput/<page>') 
@@ -113,7 +112,6 @@ def info(page,state):
             conn.close()
             return render_template('noOutput.html',state=state,page=page)
     elif state == "next":
-        print(page)
         c.execute("select min(no) from stocks where no > ?",page)
         pageno=c.fetchone()
         if pageno[0] != None:
