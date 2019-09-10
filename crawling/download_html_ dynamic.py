@@ -2,7 +2,7 @@ import urllib.request
 import urllib.parse
 
 # https://search.naver.com/search.naver?sm=top_hty&fbm=1&ie=utf8&query=%EC%B4%88%EC%BD%94%EB%A6%BF
-api='https://search.naver.com/search.naver?sm=top_hty&fbm=1&ie=utf8&query=%EC%B4%88%EC%BD%94%EB%A6%BF'
+api='https://search.naver.com/search.naver'
 values={
     'sm':'top_hty',
     'fbm':'1',

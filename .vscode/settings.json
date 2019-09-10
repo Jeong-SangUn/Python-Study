@@ -1,0 +1,10 @@
+{
+    "sqltools.connections": [
+        {
+            "database": ".\\memory.db",
+            "dialect": "SQLite",
+            "name": "aaa"
+        }
+    ],
+    "sqltools.useNodeRuntime": true
+}
