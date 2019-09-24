@@ -56,50 +56,66 @@ from time import sleep
 # print(keywords)
 
 # 6. 네이버 영화 평점(csv로 저장)
-# csvFile=open('crawling/review.csv','wt',newline='',encoding='utf-8')
-# write=csv.writer(csvFile)
+csvFile=open('crawling/naver_movie_score.csv','wt',newline='',encoding='utf-8')
+write=csv.writer(csvFile)
 
-# api = 'https://movie.naver.com/movie/point/af/list.nhn'
+api = 'https://movie.naver.com/movie/point/af/list.nhn'
 
-# i=0
-# values={'page':''}
-# while i<100:
-#     i= i + 1
-#     values['page']=str(i)
+i=0
+values={'page':''}
 
-#     params=urllib.parse.urlencode(values)
-#     url=api+'?'+params
+write.writerow(['id','document','label'])
+while i<1000:
+    i= i + 1
+    values['page']=str(i)
 
-#     data=urllib.request.urlopen(url).read()
-#     # html=data.decode('utf-8')
-#     soup = BeautifulSoup(data,'html.parser')
+    params=urllib.parse.urlencode(values)
+    url=api+'?'+params
 
+    data=urllib.request.urlopen(url).read()
+    # html=data.decode('utf-8')
+    soup = BeautifulSoup(data,'html.parser')
 
-#     num = soup.select('tbody>tr>td:first-child')
-#     score = soup.select('tbody>tr>td.point')
-#     title_content = soup.select('tbody>tr>td.title')
-#     id_date = soup.select('tbody>tr>td:last-child')
-    
-#     try:
-#         for a,b,c,d in zip(num,score,title_content,id_date):
-#             write.writerow([a.get_text(), b.get_text(), c.get_text().split('\n')[1], c.get_text().split('\n')[2], d.get_text()[:8], d.get_text()[8:16]])
-#     finally:
-#         print('csv로 저장되었습니다.')
-#     sleep(0.1)
-# csvFile.close()
+    #1. 개인번호/ 평점/ 제목/ 댓글내용/ 아이디/ 글쓴날짜
+    # num = soup.select('tbody>tr>td:first-child')
+    # score = soup.select('tbody>tr>td.point')
+    # title_content = soup.select('tbody>tr>td.title')
+    # id_date = soup.select('tbody>tr>td:last-child')
+  
+    # 1.
+    # try:
+    #     for a,b,c,d in zip(num,score,title_content,id_date):
+    #         write.writerow([a.get_text(), b.get_text(), c.get_text().split('\n')[1], c.get_text().split('\n')[2], d.get_text()[:8], d.get_text()[8:16]])
+    # finally:
+    #     print('csv로 저장되었습니다.')
 
+    #2. 개인번호/ 평점/ 제목/ 댓글내용 / 라벨(평점에 따라 직접 계산)) 
+    num = soup.select('tbody>tr>td:first-child')
+    score = soup.select('tbody>tr>td.point')
+    title_content = soup.select('tbody>tr>td.title')
+    label = 0
+    try:
+        for a,b,c in zip(num,score,title_content):
+            if int(b.get_text()) < 6:
+                label = 0
+            else:
+                label = 1
+            write.writerow([a.get_text(), c.get_text().split('\n')[2], label])
+    finally:
+        print('{0}번째 csv로 저장되었습니다.'.format(i))
+    sleep(0.1)
+csvFile.close()
 
-url = 'https://land.naver.com/article/divisionInfo.nhn?cortarNo=2729000000&rletNo=&rletTypeCd=A01&tradeTypeCd=all&hscpTypeCd=A01%3AA03%3AA04&cpId=&location=&siteOrderCode='
+# 7. 부동산 매물 시세 확인 (매물이름, 매물 가격(만원))
+# url = 'https://land.naver.com/article/divisionInfo.nhn?cortarNo=2729000000&rletNo=&rletTypeCd=A01&tradeTypeCd=all&hscpTypeCd=A01%3AA03%3AA04&cpId=&location=&siteOrderCode='
 
-data=urllib.request.urlopen(url).read()
-# html=data.decode('utf-8')
-soup = BeautifulSoup(data,'html.parser')
+# data=urllib.request.urlopen(url).read()
+# # html=data.decode('utf-8')
+# soup = BeautifulSoup(data,'html.parser')
 
-name = soup.select('td.align_l>div.inner>a')
-price = soup.select('td.align_r')
-for a,b in zip(name,price):
-    print([a.get_text().strip(), b.get_text().strip()])
+# name = soup.select('td.align_l>div.inner>a')
+# price = soup.select('td.align_r')
+# for a,b in zip(name,price):
+#     print([a.get_text().strip(), b.get_text().strip()])
 
-# for a in name:
-#     print(len(a))
 
