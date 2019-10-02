@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+</head>
+<body>
+    <img src="{{graph1}}"/>
+
+    <form action="form" method="post">
+        객실 등급
+        <select name="pclass">
+          <option value="1">1등급</option>
+          <option value="2">2등급</option>
+          <option value="3">3등급</option>
+        </select><br>
+        성별
+        <select name="sex">
+          <option value="0">남</option>
+          <option value="1">여</option>
+        </select><br>
+        나이
+        <input type="text" name="age">
+        <input type="submit" name="전송">
+    </form>
+    {{result_suv}}
+</body>
+</html>
